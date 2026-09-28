@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Hire Onboarding Portal</title>
+<style>
+:root{--purple:#3a185b;--purple2:#5a2d82;--gold:#c8a45d;--bg:#f5f2f7;--white:#fff;--ink:#28222d;--muted:#6e6674;--line:#ddd3e6;--red:#b42318;--redbg:#fef3f2;--green:#247a3c;--greenbg:#edf7ee}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Arial,sans-serif}.hero{background:linear-gradient(125deg,var(--purple),var(--purple2));color:#fff;padding:26px 18px}.hero-inner,.container{max-width:920px;margin:auto}.hero h1{margin:0 0 7px;font-size:29px}.hero p{margin:0;opacity:.9}.container{padding:24px 16px}.card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 10px 30px rgba(58,24,91,.12)}.progress-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:9px}.progress-text{font-weight:700;color:var(--purple)}.progress-percent{font-size:13px;color:var(--muted)}.progress-track{height:10px;background:#ece6f0;border-radius:10px;overflow:hidden;margin-bottom:24px}.progress-bar{height:100%;width:20%;background:linear-gradient(90deg,var(--gold),#ddbd77);transition:width .25s ease}.page{display:none}.page.active{display:block}h2{color:var(--purple);margin:0 0 6px}.subtitle{color:var(--muted);margin:0 0 22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.full{grid-column:1/-1}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.required{color:var(--red)}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cfc5d7;border-radius:9px;font:inherit;background:#fff;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--purple2);box-shadow:0 0 0 3px rgba(90,45,130,.12)}input[readonly]{background:#f7f4f9;color:#5c5362}.invalid{border-color:var(--red)!important;background:var(--redbg)!important}.error{display:none;color:var(--red);font-size:12px;margin-top:5px}.error.visible{display:block}.alert{display:none;border-radius:9px;padding:12px 14px;margin:0 0 18px}.alert.visible{display:block}.alert-error{background:var(--redbg);color:var(--red);border-left:4px solid var(--red)}.alert-success{background:var(--greenbg);color:var(--green);border-left:4px solid var(--green)}.navigation{display:flex;justify-content:space-between;gap:12px;margin-top:27px}.button-group{display:flex;gap:10px;margin-left:auto}button{border:0;border-radius:9px;padding:11px 20px;font-weight:750;font:inherit;cursor:pointer}.btn-back{background:#eee8f2;color:var(--purple)}.btn-next{background:var(--purple);color:#fff}.btn-submit{background:var(--gold);color:#252025}.btn-next:hover,.btn-submit:hover{filter:brightness(.96)}button:disabled{cursor:not-allowed;opacity:.6}.check-row{display:flex;gap:10px;align-items:flex-start;margin:16px 0}.check-row input{width:auto;margin-top:4px}.check-row label{font-weight:600}.summary{display:grid;grid-template-columns:190px 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:18px}.summary div{padding:10px 12px;border-bottom:1px solid var(--line)}.summary div:nth-child(odd){font-weight:700;background:#f8f5fa}.summary div:nth-last-child(-n+2){border-bottom:0}.success{text-align:center;padding:24px 5px}.success-icon{width:68px;height:68px;border-radius:50%;background:var(--greenbg);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:35px;margin:0 auto 16px}.record{display:inline-block;background:#f0e9f5;color:var(--purple);padding:8px 15px;border-radius:22px;font-weight:750;margin:8px 0 20px}.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.55);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-3px;margin-right:8px}@keyframes spin{to{transform:rotate(360deg)}}.privacy{font-size:12px;color:var(--muted);background:#fbf9fc;border-left:4px solid var(--gold);padding:11px 13px;margin-top:18px}.config-warning{font-size:12px;color:#7a4d00;background:#fff7e6;border:1px solid #f0d59a;border-radius:8px;padding:10px 12px;margin-bottom:18px}@media(max-width:680px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.card{padding:21px}.summary{grid-template-columns:1fr}.summary div:nth-child(odd){border-bottom:0}.navigation{flex-wrap:wrap}.button-group{width:100%;justify-content:flex-end}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-inner"><h1>New Hire Onboarding Portal</h1><p>Batch 129 • Guided training intake</p></div></header>
+<main class="container"><section class="card">
+<div id="formRegion">
+  <div class="progress-row"><div class="progress-text">Step <span id="stepNumber">1</span> of 5</div><div class="progress-percent"><span id="progressText">20</span>% complete</div></div>
+  <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+  <div id="topError" class="alert alert-error" role="alert" aria-live="assertive"></div>
+  <div id="configWarning" class="config-warning">Demo mode: replace <strong>POWER_AUTOMATE_URL</strong> in the script with the HTTP POST URL generated by the approved Power Automate flow.</div>
+
+<form id="onboardingForm" novalidate>
+  <section class="page active" data-page="1">
+    <h2>Welcome</h2><p class="subtitle">Review the batch information before starting.</p>
+    <div class="grid">
+      <div class="field"><label>Batch Number</label><input id="batchNumber" name="batchNumber" value="129" readonly></div>
+      <div class="field"><label>Venue</label><input id="venue" name="venue" value="Fortune" readonly></div>
+      <div class="field"><label>Facilitator</label><input id="facilitator" name="facilitator" value="Maamoun Shibli" readonly></div>
+      <div class="field"><label>Training Start Date</label><input id="trainingStartDate" name="trainingStartDate" value="2026-10-05" readonly></div>
+    </div>
+    <div class="privacy">This demonstration uses sample settings. In production, display the organization-approved privacy notice and collect only necessary data.</div>
+    <div class="navigation"><span></span><button type="button" class="btn-next" data-action="next">Start Onboarding →</button></div>
+  </section>
+
+  <section class="page" data-page="2">
+    <h2>Employee Details</h2><p class="subtitle">Enter the details exactly as shown in the employee record.</p>
+    <div class="grid">
+      <div class="field"><label for="fullName">Full Name <span class="required">*</span></label><input id="fullName" name="fullName" required minlength="3" maxlength="100" autocomplete="name"><div class="error">Enter a full name of at least 3 characters.</div></div>
+      <div class="field"><label for="staffId">Staff ID <span class="required">*</span></label><input id="staffId" name="staffId" required inputmode="numeric" pattern="[0-9]{5,12}" maxlength="12"><div class="error">Enter a valid Staff ID using 5 to 12 digits.</div></div>
+      <div class="field"><label for="ntId">NT ID <span class="required">*</span></label><input id="ntId" name="ntId" required pattern="[A-Za-z0-9._-]{3,30}" maxlength="30"><div class="error">Enter 3 to 30 letters, numbers, dots, hyphens or underscores.</div></div>
+      <div class="field"><label for="officialEmail">Official Email <span class="required">*</span></label><input id="officialEmail" name="officialEmail" required type="email" maxlength="120" autocomplete="email"><div class="error">Enter a valid official email address.</div></div>
+      <div class="field"><label for="mobileNumber">Mobile Number <span class="required">*</span></label><input id="mobileNumber" name="mobileNumber" required type="tel" inputmode="tel" pattern="\+?[0-9 ()-]{7,20}" maxlength="20" autocomplete="tel"><div class="error">Enter a valid mobile number.</div></div>
+      <div class="field"><label for="dateOfJoining">Date of Joining <span class="required">*</span></label><input id="dateOfJoining" name="dateOfJoining" required type="date"><div class="error">Select the date of joining.</div></div>
+    </div>
+    <div class="navigation"><button type="button" class="btn-back" data-action="back">← Back</button><button type="button" class="btn-next" data-action="next">Next →</button></div>
+  </section>
+
+  <section class="page" data-page="3">
+    <h2>Work Profile</h2><p class="subtitle">Select the new joiner’s role and reporting information.</p>
+    <div class="grid">
+      <div class="field"><label for="unitRole">Unit / Role <span class="required">*</span></label><select id="unitRole" name="unitRole" required><option value="">Select</option><option>Junior Sales Associate</option><option>Customer Service Associate</option><option>Relationship Officer</option></select><div class="error">Select a unit or role.</div></div>
+      <div class="field"><label for="campaign">Campaign <span class="required">*</span></label><select id="campaign" name="campaign" required><option value="">Select</option><option>BTDAC</option><option>Personal Finance</option><option>Credit Cards</option><option>Other</option></select><div class="error">Select a campaign.</div></div>
+      <div class="field"><label for="reportingManager">Reporting Manager <span class="required">*</span></label><input id="reportingManager" name="reportingManager" required minlength="3" maxlength="100"><div class="error">Enter the reporting manager.</div></div>
+      <div class="field"><label for="language">Language <span class="required">*</span></label><select id="language" name="language" required><option value="">Select</option><option>English</option><option>English / Arabic</option><option>English / Hindi</option><option>Other</option></select><div class="error">Select a language.</div></div>
+      <div class="field"><label for="nationality">Nationality <span class="required">*</span></label><input id="nationality" name="nationality" required minlength="2" maxlength="60"><div class="error">Enter the nationality.</div></div>
+      <div class="field"><label for="siteLocation">Site Location <span class="required">*</span></label><select id="siteLocation" name="siteLocation" required><option value="">Select</option><option>Fortune</option><option>Sharjah</option><option>Dubai</option><option>Other</option></select><div class="error">Select a site location.</div></div>
+      <div class="field"><label for="transportLocation">Transport Location</label><input id="transportLocation" name="transportLocation" maxlength="80"></div>
+      <div class="field"><label for="positionTitle">Position Title <span class="required">*</span></label><input id="positionTitle" name="positionTitle" required minlength="2" maxlength="100"><div class="error">Enter the position title.</div></div>
+    </div>
+    <div class="navigation"><button type="button" class="btn-back" data-action="back">← Back</button><button type="button" class="btn-next" data-action="next">Next →</button></div>
+  </section>
+
+  <section class="page" data-page="4">
+    <h2>Access & Equipment</h2><p class="subtitle">Confirm current status. These responses are confirmations, not system approvals.</p>
+    <div class="grid">
+      <div class="field"><label for="accessCardStatus">Access Card <span class="required">*</span></label><select id="accessCardStatus" name="accessCardStatus" required><option value="">Select</option><option>Received and working</option><option>Received with issue</option><option>Not received</option><option>Pending</option></select><div class="error">Select the access card status.</div></div>
+      <div class="field"><label for="accessCardNumber">Access Card Number</label><input id="accessCardNumber" name="accessCardNumber" maxlength="40"></div>
+      <div class="field"><label for="laptopStatus">Laptop <span class="required">*</span></label><select id="laptopStatus" name="laptopStatus" required><option value="">Select</option><option>Received and working</option><option>Received with issue</option><option>Not received</option><option>Pending</option></select><div class="error">Select the laptop status.</div></div>
+      <div class="field"><label for="headsetStatus">Headset <span class="required">*</span></label><select id="headsetStatus" name="headsetStatus" required><option value="">Select</option><option>Received and working</option><option>Received with issue</option><option>Not received</option><option>Pending</option></select><div class="error">Select the headset status.</div></div>
+      <div class="field"><label for="networkStatus">Network Credentials <span class="required">*</span></label><select id="networkStatus" name="networkStatus" required><option value="">Select</option><option>Working</option><option>Issue</option><option>Not received</option><option>Pending</option></select><div class="error">Select the network status.</div></div>
+      <div class="field"><label for="outlookStatus">Outlook <span class="required">*</span></label><select id="outlookStatus" name="outlookStatus" required><option value="">Select</option><option>Working</option><option>Issue</option><option>Not configured</option><option>Pending</option></select><div class="error">Select the Outlook status.</div></div>
+      <div class="field"><label for="hrConnectStatus">HR Connect <span class="required">*</span></label><select id="hrConnectStatus" name="hrConnectStatus" required><option value="">Select</option><option>Working</option><option>Issue</option><option>Not configured</option><option>Pending</option></select><div class="error">Select the HR Connect status.</div></div>
+      <div class="field"><label for="authenticatorStatus">Authenticator <span class="required">*</span></label><select id="authenticatorStatus" name="authenticatorStatus" required><option value="">Select</option><option>Activated</option><option>Issue</option><option>Not activated</option><option>Pending</option></select><div class="error">Select the authenticator status.</div></div>
+      <div class="field full"><label for="issueDetails">Issues / Comments</label><textarea id="issueDetails" name="issueDetails" rows="4" maxlength="1000" placeholder="Describe any access, equipment or onboarding issue"></textarea></div>
+    </div>
+    <div class="navigation"><button type="button" class="btn-back" data-action="back">← Back</button><button type="button" class="btn-next" data-action="next">Next →</button></div>
+  </section>
+
+  <section class="page" data-page="5">
+    <h2>Review & Declaration</h2><p class="subtitle">Review the key details and complete all declarations.</p>
+    <div id="reviewSummary" class="summary"></div>
+    <div class="check-row"><input type="checkbox" id="confirmAccuracy" name="confirmAccuracy" required><label for="confirmAccuracy">I confirm that the information provided is accurate. <span class="required">*</span></label></div>
+    <div class="check-row"><input type="checkbox" id="confirmGuidance" name="confirmGuidance" required><label for="confirmGuidance">I confirm that I received onboarding guidance. <span class="required">*</span></label></div>
+    <div class="check-row"><input type="checkbox" id="confirmPrivacy" name="confirmPrivacy" required><label for="confirmPrivacy">I acknowledge that the information will be used for onboarding and training administration. <span class="required">*</span></label></div>
+    <div id="declarationError" class="error">Complete all declaration checkboxes before submitting.</div>
+    <div class="navigation"><button type="button" class="btn-back" data-action="back">← Back</button><button type="submit" id="submitButton" class="btn-submit">Submit ✓</button></div>
+  </section>
+</form>
+</div>
+
+<div id="successPage" class="success" hidden>
+  <div class="success-icon">✓</div><h2>Onboarding Submitted</h2>
+  <p>The onboarding information was accepted by the workflow.</p>
+  <div class="record">Record ID: <span id="recordId"></span></div>
+  <p>Next steps can include owner review, access validation, L&amp;D notification and reporting refresh.</p>
+</div>
+</section></main>
+
+<script>
+/* POWER AUTOMATE CONFIGURATION
+   After saving the Power Automate flow, paste its generated HTTP POST URL below.
+   Do not publish a flow URL in a public website. For production, prefer tenant-authenticated access.
+*/
+const POWER_AUTOMATE_URL = "PASTE_POWER_AUTOMATE_HTTP_POST_URL_HERE";
+const DEMO_MODE = POWER_AUTOMATE_URL.includes("PASTE_POWER_AUTOMATE");
+
+let currentPage = 1;
+const totalPages = 5;
+const form = document.getElementById("onboardingForm");
+const topError = document.getElementById("topError");
+const submitButton = document.getElementById("submitButton");
+
+function fieldsOnPage(page){return [...document.querySelector(`[data-page="${page}"]`).querySelectorAll("input, select, textarea")].filter(el=>!el.readOnly);}
+function setFieldState(field, valid){field.classList.toggle("invalid",!valid);const error=field.closest(".field")?.querySelector(".error");if(error)error.classList.toggle("visible",!valid);}
+function validatePage(page){
+  topError.classList.remove("visible"); let firstInvalid=null;
+  for(const field of fieldsOnPage(page)){
+    const valid=field.checkValidity(); setFieldState(field,valid); if(!valid&&!firstInvalid)firstInvalid=field;
+  }
+  if(page===5){const checks=["confirmAccuracy","confirmGuidance","confirmPrivacy"].map(id=>document.getElementById(id));const valid=checks.every(c=>c.checked);document.getElementById("declarationError").classList.toggle("visible",!valid);if(!valid&&!firstInvalid)firstInvalid=checks.find(c=>!c.checked);}
+  if(firstInvalid){topError.textContent="Please correct the highlighted required fields before continuing.";topError.classList.add("visible");firstInvalid.focus();return false}return true;
+}
+function updateProgress(){const pct=Math.round(currentPage/totalPages*100);document.getElementById("stepNumber").textContent=currentPage;document.getElementById("progressText").textContent=pct;document.getElementById("progressBar").style.width=pct+"%";}
+function showPage(page){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",Number(p.dataset.page)===page));currentPage=page;topError.classList.remove("visible");updateProgress();if(page===5)buildReview();window.scrollTo({top:0,behavior:"smooth"});}
+function buildReview(){const pairs=[["Batch",batchNumber.value],["Full Name",fullName.value],["Staff ID",staffId.value],["NT ID",ntId.value],["Official Email",officialEmail.value],["Unit / Role",unitRole.value],["Campaign",campaign.value],["Reporting Manager",reportingManager.value],["Site Location",siteLocation.value]];document.getElementById("reviewSummary").innerHTML=pairs.map(([k,v])=>`<div>${escapeHtml(k)}</div><div>${escapeHtml(v||"Not entered")}</div>`).join("");}
+function escapeHtml(value){return String(value).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));}
+function makeRecordId(){return `B${batchNumber.value}-${staffId.value}`;}
+function payload(){return {recordKey:makeRecordId(),submittedAt:new Date().toISOString(),source:"HTML Onboarding Portal",batchNumber:batchNumber.value,venue:venue.value,facilitator:facilitator.value,trainingStartDate:trainingStartDate.value,fullName:fullName.value.trim(),staffId:staffId.value.trim(),ntId:ntId.value.trim(),officialEmail:officialEmail.value.trim(),mobileNumber:mobileNumber.value.trim(),dateOfJoining:dateOfJoining.value,unitRole:unitRole.value,campaign:campaign.value,reportingManager:reportingManager.value.trim(),language:language.value,nationality:nationality.value.trim(),siteLocation:siteLocation.value,transportLocation:transportLocation.value.trim(),positionTitle:positionTitle.value.trim(),accessCardStatus:accessCardStatus.value,accessCardNumber:accessCardNumber.value.trim(),laptopStatus:laptopStatus.value,headsetStatus:headsetStatus.value,networkStatus:networkStatus.value,outlookStatus:outlookStatus.value,hrConnectStatus:hrConnectStatus.value,authenticatorStatus:authenticatorStatus.value,issueDetails:issueDetails.value.trim(),confirmAccuracy:confirmAccuracy.checked,confirmGuidance:confirmGuidance.checked,confirmPrivacy:confirmPrivacy.checked};}
+
+form.addEventListener("input",e=>{if(e.target.matches("input,select,textarea"))setFieldState(e.target,e.target.checkValidity())});
+document.addEventListener("click",e=>{const action=e.target.dataset.action;if(action==="next"&&validatePage(currentPage))showPage(currentPage+1);if(action==="back")showPage(currentPage-1)});
+form.addEventListener("submit",async e=>{
+  e.preventDefault(); if(!validatePage(5))return;
+  submitButton.disabled=true;submitButton.innerHTML='<span class="spinner"></span>Submitting';topError.classList.remove("visible");
+  try{
+    let result={recordId:makeRecordId()};
+    if(DEMO_MODE){await new Promise(r=>setTimeout(r,700));}
+    else{
+      const response=await fetch(POWER_AUTOMATE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload())});
+      if(!response.ok)throw new Error(`Workflow returned HTTP ${response.status}`);
+      const text=await response.text();if(text){try{result=JSON.parse(text)}catch{result={recordId:makeRecordId()}}}
+    }
+    document.getElementById("formRegion").hidden=true;document.getElementById("successPage").hidden=false;document.getElementById("recordId").textContent=result.recordId||makeRecordId();
+  }catch(error){topError.textContent="Submission was not completed. Check the workflow URL, permissions, CORS policy and Power Automate run history, then try again.";topError.classList.add("visible");submitButton.disabled=false;submitButton.textContent="Submit ✓";console.error(error);}
+});
+if(!DEMO_MODE)document.getElementById("configWarning").style.display="none";
+updateProgress();
+</script>
+</body>
+</html>
